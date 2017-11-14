@@ -1,0 +1,33 @@
+#homeDiv{
+    margin-top: 7%;
+    text-align: center;
+}
+
+#formLogin{
+    padding: 40px;
+    margin-left: 30%;
+    margin-right: 30%;
+    background-color: white;
+}
+
+.info_1{
+    font-size: 25px;
+}
+
+.logo-info-1{
+    height:180px;
+    width:125px;
+}
+
+#btCancelar{
+    width: 300px;
+    margin-top: 10px;
+}
+
+.spacer{
+    height: 75px;
+}
+
+.background{
+    background-image: url('../resources/fundoLogin.jpg');
+}

@@ -1,0 +1,11 @@
+server/node_modules
+web/node_modules
+SmartAuth/*.iml
+SmartAuth/.gradle
+SmartAuth/local.properties
+SmartAuth/.idea/workspace.xml
+SmartAuth/.idea/libraries
+SmartAuth/.DS_Store
+SmartAuth/build
+SmartAuth/captures
+SmartAuth/.externalNativeBuild

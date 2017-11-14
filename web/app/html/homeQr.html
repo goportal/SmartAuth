@@ -1,0 +1,12 @@
+
+<div id="homeDiv" ng-app="app" ng-controller="leituraQrController">
+	
+	<img class="logo-info-1" src="../resources/logoSmartAuth.png"/>
+	<p class="info_1">ESCANEIE O QRCODE COM O APLICATIVO <br> DO SMARTPHNE PARA REALIZAR A AUTENTICAÇÂO</p>
+
+		<div>
+			<img id="myQrCode" class="z-depth-3" src="http://chart.apis.google.com/chart?cht=qr&chl={{qrText}}&chs=300x300"/>
+			
+		</div>
+		<a id="btCancelar" class="waves-effect waves-light btn" ng-click="cancelar()">Cancelar</a>
+</div>

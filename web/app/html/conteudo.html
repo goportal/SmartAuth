@@ -1,0 +1,16 @@
+<div id="homeDiv" ng-app="app" ng-controller="conteudoController">
+    
+    <div id="formLogin" class="z-depth-3">
+        
+        <h1>{{coletania.banda}}</h1>
+
+        <div ng-repeat="album in coletania.albuns">
+
+            <h5>{{album}}</h5>
+
+        </div>
+        
+        <a id="btDeslogar" class="waves-effect waves-light btn" ng-click="deslogar()">Deslogar</a>
+
+    </div>
+</div>
