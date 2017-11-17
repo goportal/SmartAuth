@@ -13,79 +13,40 @@
     <EditText
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
+        android:inputType="textEmailAddress"
         android:ems="10"
-        android:layout_marginTop="41dp"
-        android:id="@+id/cp_senha"
-        android:layout_below="@+id/cp_email"
-        android:layout_alignStart="@+id/cp_email" />
-
-    <Button
-        android:text="Voltar"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/bt_voltar"
-        android:layout_alignBaseline="@+id/bt_registrar2"
-        android:layout_alignBottom="@+id/bt_registrar2"
-        android:layout_alignStart="@+id/cp_confirmaSenha"
-        android:background="@color/colorPrimary"
-        android:textColor="@android:color/background_light" />
+        android:id="@+id/cp_email"
+        android:layout_below="@+id/tx_email"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:text="Registrar"
-        android:layout_width="100dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:id="@+id/bt_registrar2"
-        android:layout_marginBottom="26dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/cp_confirmaSenha"
         android:background="@color/colorPrimary"
-        android:textColor="@android:color/background_light" />
+        android:textColor="@android:color/background_light"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
 
-    <EditText
-        android:layout_width="300dp"
+    <Button
+        android:text="Voltar"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/cp_confirmaSenha"
-        android:layout_below="@+id/cp_senha"
-        android:layout_alignStart="@+id/cp_senha"
-        android:layout_marginTop="39dp" />
-
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:layout_marginTop="56dp"
-        android:id="@+id/cp_email"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:id="@+id/bt_voltar"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/background_light"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:text="E-mail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="155dp"
+        android:id="@+id/tx_email"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/cp_email"
-        android:layout_marginTop="33dp"
-        android:id="@+id/tx_email" />
+        android:layout_alignParentStart="true" />
 
-    <TextView
-        android:text="Senha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
-        android:id="@+id/tx_senha"
-        android:layout_below="@+id/cp_email"
-        android:layout_alignStart="@+id/cp_senha" />
-
-    <TextView
-        android:text="Confirmação de senha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:id="@+id/tx_confirmaSenha"
-        android:layout_below="@+id/cp_senha"
-        android:layout_alignStart="@+id/cp_confirmaSenha" />
 </RelativeLayout>

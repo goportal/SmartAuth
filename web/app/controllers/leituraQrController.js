@@ -19,7 +19,7 @@ angular.module('app')
             console.log("worked bitch :)");
         })
         .error((err)=>{
-            console.log("erro:");
+            console.log("erro:"+err);
             $timeout(isAutorizado,3000);
         })
         

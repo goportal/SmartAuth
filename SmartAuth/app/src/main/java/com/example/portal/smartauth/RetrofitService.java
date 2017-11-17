@@ -14,7 +14,6 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("registrar")
     Call<RespostaRegistro> converterUnidade(@Field("email") String email,
-                                            @Field("senha") String senha,
                                             @Field("dispositivo") String dispositivo,
                                             @Field("sensores") String[] sensores
     );

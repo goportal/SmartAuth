@@ -1,18 +1,18 @@
 const express = require('express');
 const servico = express.Router(); 
 var crypto = require('crypto');
+const NodeMailer = require('../nodemailer/NodeMailer');
 const mongodb = require('mongodb').MongoClient;
 const validacao = require('./validacoes');
 const ObjectId = require('mongodb').ObjectID;
 const jwt = require('jsonwebtoken');
 const jwt_key = "H4v31Y0u2Ev3r353en47he5R41n";
 const authMiddleware = require('./jwtMiddleware');
-let testedeteste = false;
 
 function mongo(callback){
     mongodb.connect('mongodb://localhost:27017/smartauth',(err,db)=>{
-    callback(err,db);
-})
+        callback(err,db);
+    })
 }
 
 servico.post('/login', (req, res) => {
@@ -35,10 +35,7 @@ servico.post('/login', (req, res) => {
                     res.status(500).send("erro ao buscar usuario no banco de dados");
                 }else{
                     
-                    //console.log("AUQIIIIIIIIIIIIIII");
-                    //console.log(result);
                     if(result){
-                        
                         
                         let dadosUsuario = {
                             usuario:result.email,
@@ -75,6 +72,30 @@ servico.post('/login', (req, res) => {
     });
 });
 
+servico.get('/ativarSmartphone',(req,res)=>{
+    let dispositivo = req.query.dispositivo;
+
+    mongo((err,db)=>{
+
+        let query = {
+            dispositivo:dispositivo
+        };
+        let update = {
+            $set: {"ativo": true}
+        };
+
+        db.collection('usuarios').findOneAndUpdate(query,update,(err,result)=>{
+            if(err){
+                console.log('Não foi possivel validar o aparelho informado');
+                res.status(500).send('Não foi possivel validar o aparelho informado');
+            }else{
+                console.log('Smartphone ativado com sucesso!');
+                res.status(200).send('Smartphone ativado com sucesso!');
+            }
+        })
+    })
+})
+
 servico.post('/registrar',(req,res) => {
     
     console.log("tentativa de registrar realizada!");
@@ -84,16 +105,17 @@ servico.post('/registrar',(req,res) => {
         if(!err){
             const usuario = {
                 email:data.email,
-                senha:data.senha,
                 dispositivo: data.dispositivo,
-                leitores: data.sensores
+                leitores: data.sensores,
+                ativo:false
             }
-            
+        
             mongo((err,db)=>{
                 db.collection('usuarios').insertOne(usuario,(err)=>{
                     if(!err){
                         res.status(200).send({sucesso:true,mensagem:"Smartphone cadastrado com sucesso"});
                         console.log("Smartphone cadastrado com sucesso");
+                        enviaEmailConfirmacao(usuario.email, usuario.dispositivo);
                     }else{
                         res.status(500).send({sucesso:false,mensagem:"Erro ao cadastrar smartphone"});
                         console.log("Erro ao cadastrar smartphone");
@@ -110,6 +132,7 @@ servico.post('/registrar',(req,res) => {
 });
 
 servico.post("/isAutorizado",(req,res)=>{
+
 
     console.log("isAutorizado");
     let hash = req.body.hash;
@@ -154,9 +177,8 @@ servico.post('/autentica',(req,res)=>{
     mongo((err,db)=>{
         db.collection('usuarios').findOne(query,(err,result)=>{
             if(!err){
-                if(data.dispositivo === result.dispositivo && data.autenticacaoValida){
+                if(data.dispositivo === result.dispositivo && data.autenticacaoValida && result.ativo){
                     autentica(data,(token)=>{
-                        //console.log(token);
 
                         db.collection('usuarios').update(
                             {_id: new ObjectId(result._id)}, 
@@ -178,7 +200,12 @@ servico.post('/autentica',(req,res)=>{
                         ); 
                     });
                 }else{
-                    res.status(401).send("Usuario invalido");
+                    if(!result.ativo){
+                        res.status(401).send("Smartphone não esta ativo, acesse o email para validar");
+                        console.log("smartphone nao ativo   ");
+                    }else{
+                        res.status(401).send("Usuario invalido");
+                    }
                 }
             }else{
                 res.status(401).send("Usuario invalido");
@@ -228,6 +255,18 @@ servico.post('/conteudo',authMiddleware,(req,res)=>{
         });
         
         callback(token);
+    }
+
+    function enviaEmailConfirmacao(email, dispositivo){
+        const mailer = new NodeMailer();
+        mailer.setTo(email);
+        mailer.setTemplate('../nodemailer/validaLogin.ejs');
+        mailer.setSubject('SmartAuth - Validação de aparelho');
+        mailer.setMensagens({
+            email: email,
+            dispositivo: dispositivo
+        });
+        mailer.enviarEmail();
     }
     
     

@@ -24,8 +24,6 @@ import retrofit2.Response;
 public class Registrar extends AppCompatActivity {
 
     EditText cp_email;
-    EditText cp_senha;
-    EditText cp_confirmaSenha;
     Button bt_registrar2;
     Button bt_voltar;
 
@@ -36,8 +34,6 @@ public class Registrar extends AppCompatActivity {
 
         bt_voltar = (Button) findViewById(R.id.bt_voltar);
         cp_email = (EditText) findViewById(R.id.cp_email);
-        cp_senha = (EditText) findViewById(R.id.cp_senha);
-        cp_confirmaSenha = (EditText) findViewById(R.id.cp_confirmaSenha);
         bt_registrar2 = (Button) findViewById(R.id.bt_registrar2);
 
         bt_registrar2.setOnClickListener(new View.OnClickListener() {
@@ -45,13 +41,11 @@ public class Registrar extends AppCompatActivity {
             public void onClick(View view) {
 
                 String email = cp_email.getText().toString();
-                String senha = cp_senha.getText().toString();
-                String confirmaSenha = cp_confirmaSenha.getText().toString();
 
-                String valida = validaRegistro(email,senha,confirmaSenha);
+                String valida = validaRegistro(email);
 
                 if(valida.equals("Registro realizado com sucesso")){
-                    retrofitConverter(email,senha);
+                    retrofitConverter(email);
                     Toast toast = Toast.makeText(Registrar.this,valida,Toast.LENGTH_SHORT);
                     toast.show();
                     Intent tela = new Intent(Registrar.this,Home.class);
@@ -73,15 +67,14 @@ public class Registrar extends AppCompatActivity {
 
     }
 
-
-    public void retrofitConverter(String email, String senha) {
+    public void retrofitConverter(String email) {
         RetrofitService service = ServiceGenerator.createService(RetrofitService.class);
 
         String dispositivo = (Settings.Secure.getString(getBaseContext().getContentResolver(), Settings.Secure.ANDROID_ID));
 
         String[] sensores = getSensorList();
 
-        Call<RespostaRegistro> call = service.converterUnidade(email, senha, dispositivo, sensores);
+        Call<RespostaRegistro> call = service.converterUnidade(email, dispositivo, sensores);
 
         call.enqueue(new Callback<RespostaRegistro>() {
             @Override
@@ -128,18 +121,12 @@ public class Registrar extends AppCompatActivity {
 
         return sensoresArray;
 
-        //Toast.makeText(getApplicationContext(), sensores, Toast.LENGTH_LONG).show();
-
     }
 
-    public String validaRegistro(String email, String senha, String confirmaSenha){
+    public String validaRegistro(String email){
 
         if(email.indexOf("@") == -1 || email.indexOf(".com") == -1){
             return "Email invalido";
-        }else if(!confirmaSenha.equals(senha)){
-            return "As senhas nao coincidem";
-        }else if(senha.length() < 6){
-            return "A senha deve conter ao menos 6 caracteres";
         }else
             return "Registro realizado com sucesso";
     }

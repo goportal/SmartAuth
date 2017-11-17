@@ -9,8 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "jsonwebtoken": "^7.4.1",
     "body-parser": "^1.18.0",
-    "cors": "^2.8.4"
+    "cors": "^2.8.4",
+    "ejs": "^2.5.7",
+    "jsonwebtoken": "^7.4.1",
+    "nodemailer": "^4.4.0"
   }
 }
