@@ -16,7 +16,6 @@ angular.module('app')
         .success((data)=>{
             localStorage.setItem("token", data);
             $location.url("/conteudo");
-            console.log("worked bitch :)");
         })
         .error((err)=>{
             console.log("erro:"+err);
