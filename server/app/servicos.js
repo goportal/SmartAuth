@@ -191,24 +191,24 @@ servico.post('/autentica',(req,res)=>{
                                 
                                 if(err){
                                     console.log("Erro ao setar token de acesso no banco"+err);
-                                    res.status(404).send("Erro ao setar token de acesso no banco");
+                                    res.status(404).send({sucesso:false,mensagem:"Erro ao setar token de acesso no banco"});
                                 }else{
                                     console.log("Sucesso ao setar token de acesso no banco");
-                                    res.status(200).send("Sucesso ao setar token de acesso no banco");
+                                    res.status(200).send({sucesso:true,mensagem:"Sucesso ao setar token de acesso no banco"});
                                 }
                             }    
                         ); 
                     });
                 }else{
                     if(!result.ativo){
-                        res.status(401).send("Smartphone não esta ativo, acesse o email para validar");
+                        res.status(401).send({sucesso:false,mensagem:"Smartphone não esta ativo, acesse o email para validar"});
                         console.log("smartphone nao ativo   ");
                     }else{
-                        res.status(401).send("Usuario invalido");
+                        res.status(401).send({sucesso:false,mensagem:"Usuario invalido"});
                     }
                 }
             }else{
-                res.status(401).send("Usuario invalido");
+                res.status(401).send({sucesso:false,mensagem:"Usuario invalido"});
             }
         });
     });
