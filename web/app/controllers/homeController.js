@@ -4,8 +4,6 @@ angular.module('app')
 
     $scope.enviaLogin = function(){
 
-        //console.log("eu estou aqui: "+$scope.cpLogin);
-
         login ={
             login:$scope.cpLogin
         }
@@ -13,11 +11,7 @@ angular.module('app')
         $http.post('http://localhost:7008/servicos/login',login)
 
         .success(function(data){
-            //console.log("Enviado com sucesso");
-            //console.log(data);
-
             $location.url("/qr?data="+data+"&login="+login.login);
-
         })
 
         .error(function(err){
@@ -30,8 +24,3 @@ angular.module('app')
     }
 
 });
-
-//localStorage.setItem("token", data.token);
-    
-        
-         

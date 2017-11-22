@@ -1,6 +1,11 @@
 #homeDiv{
-    margin-top: 7%;
+    margin-top: 25%;
     text-align: center;
+}
+
+#homeQrDiv{
+    margin-top: 7%;
+    text-align: center; 
 }
 
 #formLogin{

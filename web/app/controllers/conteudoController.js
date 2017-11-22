@@ -13,7 +13,7 @@ angular.module('app')
     })
     .error((err)=>{
         console.log("Erro ao buscar dados ERROR:"+err);
-        elert("Erro ao buscar dados, possível acesso indevido!");
+        alert("Erro ao buscar dados, possível acesso indevido!");
     });
 
     $scope.deslogar = function(){
