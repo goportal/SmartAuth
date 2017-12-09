@@ -6,7 +6,7 @@ angular.module('app')
 
     $scope.coletania = {};
     
-    $http.post('http://localhost:7008/servicos/conteudo',{token:localStorage.getItem('token')})
+    $http.post('https://localhost:7008/servicos/conteudo',{token:localStorage.getItem('token')})
     .success((data)=>{
         console.log("Dados retornados com sucesso");
         $scope.coletania = data;

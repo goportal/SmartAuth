@@ -15,7 +15,7 @@ angular.module('app')
 
     function isAutorizado(){
 
-        $http.post("http://localhost:7008/servicos/isAutorizado",{hash:param.data,login:param.login})
+        $http.post("https://localhost:7008/servicos/isAutorizado",{hash:param.data,login:param.login})
         .success((data)=>{
             localStorage.setItem("token", data);
             $location.url("/conteudo");
